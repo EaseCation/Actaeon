@@ -1,4 +1,4 @@
 package me.onebone.actaeon.entity;
 
-public interface Climbable{
+public interface Climbable {
 }

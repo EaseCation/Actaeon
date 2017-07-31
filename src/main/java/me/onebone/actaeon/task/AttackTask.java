@@ -4,7 +4,6 @@ import cn.nukkit.Server;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
-import cn.nukkit.network.protocol.AnimatePacket;
 import cn.nukkit.network.protocol.EntityEventPacket;
 import me.onebone.actaeon.entity.MovingEntity;
 
@@ -58,5 +57,6 @@ public class AttackTask extends MovingEntityTask {
     }
 
     @Override
-    public void forceStop() {}
+    public void forceStop() {
+    }
 }

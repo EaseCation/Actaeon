@@ -4,65 +4,69 @@ import cn.nukkit.entity.EntityAgeable;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
+import me.onebone.actaeon.hook.WanderHook;
 import me.onebone.actaeon.target.AreaPlayerHoldTargetFinder;
 
-public class Pig extends Animal implements EntityAgeable{
-	public static final int NETWORK_ID = 12;
+import java.util.Random;
 
-	public Pig(FullChunk chunk, CompoundTag nbt) {
-		super(chunk, nbt);
-		this.setTargetFinder(new AreaPlayerHoldTargetFinder(this, 500, Item.get(Item.WHEAT), 100));
-	}
+public class Pig extends Animal implements EntityAgeable {
+    public static final int NETWORK_ID = 12;
 
-	@Override
-	public float getWidth() {
-		return 0.9f;
-	}
+    public Pig(FullChunk chunk, CompoundTag nbt) {
+        super(chunk, nbt);
+        this.setTargetFinder(new AreaPlayerHoldTargetFinder(this, 500, Item.get(Item.WHEAT), 10));
+        this.addHook("wander", new WanderHook(this));
+    }
 
-	@Override
-	public float getHeight() {
-		if (isBaby()) {
-			return 0.9f; // No have information
-		}
-		return 0.9f;
-	}
+    @Override
+    public float getWidth() {
+        return 0.9f;
+    }
 
-	@Override
-	public float getEyeHeight() {
-		if (isBaby()) {
-			return 0.9f; // No have information
-		}
-		return 0.9f;
-	}
+    @Override
+    public float getHeight() {
+        if (isBaby()) {
+            return 0.9f; // No have information
+        }
+        return 0.9f;
+    }
 
-	@Override
-	public boolean entityBaseTick(int tickDiff){
-		return super.entityBaseTick(tickDiff);
-	}
+    @Override
+    public float getEyeHeight() {
+        if (isBaby()) {
+            return 0.9f; // No have information
+        }
+        return 0.9f;
+    }
 
-	@Override
-	public String getName() {
-		return this.getNameTag();
-	}
+    @Override
+    public boolean entityBaseTick(int tickDiff) {
+        return super.entityBaseTick(tickDiff);
+    }
 
-	@Override
-	public Item[] getDrops() {
-		return new Item[]{Item.get(Item.RAW_PORKCHOP)};
-	}
+    @Override
+    public String getName() {
+        return this.getNameTag();
+    }
 
-	@Override
-	public int getNetworkId() {
-		return NETWORK_ID;
-	}
+    @Override
+    public Item[] getDrops() {
+        return new Item[]{Item.get(Item.RAW_PORKCHOP, 0, new Random().nextInt(2) + 1)};
+    }
 
-	@Override
-	protected void initEntity() {
-		super.initEntity();
-		setMaxHealth(10);
-	}
+    @Override
+    public int getNetworkId() {
+        return NETWORK_ID;
+    }
 
-	@Override
-	public boolean isBaby(){
-		return false;
-	}
+    @Override
+    protected void initEntity() {
+        super.initEntity();
+        setMaxHealth(10);
+    }
+
+    @Override
+    public boolean isBaby() {
+        return false;
+    }
 }

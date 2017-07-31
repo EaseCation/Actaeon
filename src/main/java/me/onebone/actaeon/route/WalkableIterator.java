@@ -1,15 +1,10 @@
 package me.onebone.actaeon.route;
 
-import cn.nukkit.Server;
 import cn.nukkit.block.Block;
-import cn.nukkit.entity.Entity;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.particle.FlameParticle;
-import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.Vector3;
 
-import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.Iterator;
 
 public class WalkableIterator implements Iterator<Block> {
     private final Level level;

@@ -15,6 +15,8 @@ public abstract class MovingEntityHook {
 
     protected final MovingEntity entity;
 
+    public boolean executing = false;
+
     public MovingEntityHook(MovingEntity entity) {
         this.entity = entity;
     }
@@ -23,8 +25,13 @@ public abstract class MovingEntityHook {
         return entity;
     }
 
-    public void onUpdate(int tick) {}
+    public void onUpdate(int tick) {
+    }
 
-    public void onDamage(Entity damager) {}
+    public void onDamage(Entity damager) {
+    }
 
+    public boolean shouldExecute() {
+        return true;
+    }
 }
