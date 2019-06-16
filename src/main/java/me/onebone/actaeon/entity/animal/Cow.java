@@ -3,6 +3,7 @@ package me.onebone.actaeon.entity.animal;
 import cn.nukkit.Player;
 import cn.nukkit.entity.EntityAgeable;
 import cn.nukkit.event.entity.EntityDamageEvent;
+import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -75,14 +76,27 @@ public class Cow extends Animal implements EntityAgeable {
 
     @Override
     public boolean entityBaseTick(int tickDiff) {
-
         return super.entityBaseTick(tickDiff);
     }
 
     @Override
     public boolean onInteract(Player player, Item item) {
-        if (item.getId() == Item.BUCKET) {
-            player.getInventory().addItem(Item.get(335, 0, 1));
+        if (item.getId() == Item.BUCKET && item.getDamage() == 0) {
+            PlayerInventory inv = player.getInventory();
+
+            item.count--;
+
+            if (item.count <= 0) {
+                inv.setItem(inv.getHeldItemIndex(), Item.get(Item.BUCKET, 1));
+            } else {
+                Item milk = Item.get(Item.BUCKET, 1);
+
+                if (inv.canAddItem(milk)) {
+                    inv.setItem(inv.getHeldItemIndex(), item);
+                    inv.addItem();
+                }
+            }
+
             return true;
         }
 

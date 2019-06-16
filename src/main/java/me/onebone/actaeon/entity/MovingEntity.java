@@ -27,6 +27,7 @@ import me.onebone.actaeon.util.Utils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 abstract public class MovingEntity extends EntityCreature {
 
@@ -146,7 +147,7 @@ abstract public class MovingEntity extends EntityCreature {
                     double minY = block.getFloorY();
                     double maxY = minY + 1 - f;
 
-                    swim = Math.max(swim, this.boundingBox.maxY >= maxY ? maxY - this.boundingBox.minY : this.boundingBox.maxY - minY);
+                    swim = Math.max(swim, this.boundingBox.getMaxY() >= maxY ? maxY - this.boundingBox.getMinY() : this.boundingBox.getMaxY() - minY);
                     break;
                 }
             }
@@ -219,7 +220,7 @@ abstract public class MovingEntity extends EntityCreature {
                 }
 
                 if (swim != 0) {
-                    if (this.level.rand.nextFloat() < 0.8) {
+                    if (ThreadLocalRandom.current().nextFloat() < 0.8) {
                         this.motionY = Math.min(0.15, this.motionY + (0.2 * swim));
                     }
 
@@ -250,7 +251,7 @@ abstract public class MovingEntity extends EntityCreature {
                         if (blockBB == null || b.canPassThrough())
                             continue;
 
-                        double diffY = blockBB.maxY - this.boundingBox.minY;
+                        double diffY = blockBB.getMaxY() - this.boundingBox.getMinY();
                         if (diffY < getJumpHeight()) {
                             jump = true;
                         }
@@ -552,7 +553,7 @@ abstract public class MovingEntity extends EntityCreature {
 
     @Override
     public void addMovement(double x, double y, double z, double yaw, double pitch, double headYaw) {
-        this.level.addEntityMovement(this.chunk.getX(), this.chunk.getZ(), this.id, x, y, z, yaw, pitch, headYaw, false);
+        this.level.addEntityMovement(this, x, y, z, yaw, pitch, headYaw);
     }
 }
 
