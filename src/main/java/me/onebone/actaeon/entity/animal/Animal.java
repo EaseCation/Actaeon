@@ -14,6 +14,7 @@ import cn.nukkit.network.protocol.UpdateAttributesPacket;
 import me.onebone.actaeon.entity.EntityAgeable;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 abstract public class Animal extends EntityAgeable {
 
@@ -39,7 +40,7 @@ abstract public class Animal extends EntityAgeable {
             --this.inLoveTicks;
 
             if (this.inLoveTicks % 10 == 0) {
-                Random rand = this.level.rand;
+                Random rand = ThreadLocalRandom.current();
 
                 this.level.addParticle(new HeartParticle(new Vector3(this.x + (rand.nextFloat() * this.getWidth() * 2) - getWidth(), this.y + 0.5 + (rand.nextFloat() * getHeight()), this.z + (rand.nextFloat() * getWidth() * 2) - this.getWidth())));
             }

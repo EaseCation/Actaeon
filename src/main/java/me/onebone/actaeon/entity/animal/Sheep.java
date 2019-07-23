@@ -3,8 +3,6 @@ package me.onebone.actaeon.entity.animal;
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.data.ByteEntityData;
-import cn.nukkit.inventory.Recipe;
-import cn.nukkit.inventory.ShapelessRecipe;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.math.Vector3;
@@ -15,10 +13,9 @@ import me.onebone.actaeon.entity.EntityAgeable;
 import me.onebone.actaeon.event.PlayerSheepShearEvent;
 import me.onebone.actaeon.hook.*;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Sheep extends Animal {
 
@@ -135,12 +132,13 @@ public class Sheep extends Animal {
 
             this.setSheared(true);
 
-            int count = 1 + this.level.rand.nextInt(3);
+            Random rand = ThreadLocalRandom.current();
+            int count = 1 + rand.nextInt(3);
             while (count-- > 0) {
                 this.level.dropItem(this.add(0, 1), Item.get(Item.WOOL, getColor().getWoolData()), new Vector3(
-                        (this.level.rand.nextFloat() - this.level.rand.nextFloat()) * 0.1,
-                        this.level.rand.nextFloat() * 0.05,
-                        (this.level.rand.nextFloat() - this.level.rand.nextFloat()) * 0.1
+                        (rand.nextFloat() - rand.nextFloat()) * 0.1,
+                        rand.nextFloat() * 0.05,
+                        (rand.nextFloat() - rand.nextFloat()) * 0.1
                 ));
             }
 
@@ -179,24 +177,24 @@ public class Sheep extends Animal {
     }
 
     private DyeColor getColorFromParents(Sheep father, Sheep mother) {
-        List<DyeColor> colors = Arrays.asList(father.getColor(), mother.getColor());
+//        List<DyeColor> colors = Arrays.asList(father.getColor(), mother.getColor());
+//
+//        for (Recipe recipe : getServer().getCraftingManager().recipes.values()) {
+//            if (!(recipe instanceof ShapelessRecipe)) {
+//                continue;
+//            }
+//
+//            ShapelessRecipe rec = (ShapelessRecipe) recipe;
+//            List<Item> ingredients = rec.getIngredientList();
+//
+//            if (ingredients.size() != 2) {
+//                continue;
+//            }
+//
+//
+//        }
 
-        for (Recipe recipe : getServer().getCraftingManager().recipes.values()) {
-            if (!(recipe instanceof ShapelessRecipe)) {
-                continue;
-            }
-
-            ShapelessRecipe rec = (ShapelessRecipe) recipe;
-            List<Item> ingredients = rec.getIngredientList();
-
-            if (ingredients.size() != 2) {
-                continue;
-            }
-
-
-        }
-
-        if (this.level.rand.nextBoolean()) {
+        if (ThreadLocalRandom.current().nextBoolean()) {
             return father.getColor();
         } else {
             return mother.getColor();

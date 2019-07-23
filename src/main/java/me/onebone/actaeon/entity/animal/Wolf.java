@@ -12,6 +12,8 @@ import cn.nukkit.utils.DyeColor;
 import me.onebone.actaeon.entity.EntityTameable;
 import me.onebone.actaeon.hook.*;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Wolf extends EntityTameable {
 
     public static final int NETWORK_ID = 14;
@@ -90,7 +92,7 @@ public class Wolf extends EntityTameable {
             if (item.getId() == Item.BONE && !isAngry()) {
                 item.count--;
 
-                if (this.level.rand.nextInt(3) == 0) {
+                if (ThreadLocalRandom.current().nextInt(3) == 0) {
                     setTamed(true, player);
                     setMaxHealth(20);
                     setHealth(20);

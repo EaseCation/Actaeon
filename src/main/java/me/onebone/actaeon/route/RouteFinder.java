@@ -2,6 +2,7 @@ package me.onebone.actaeon.route;
 
 import cn.nukkit.level.Level;
 import cn.nukkit.math.AxisAlignedBB;
+import cn.nukkit.math.SimpleAxisAlignedBB;
 import cn.nukkit.math.Vector3;
 import me.onebone.actaeon.entity.MovingEntity;
 
@@ -78,14 +79,14 @@ public abstract class RouteFinder {
 
     public void setBoundingBox(AxisAlignedBB bb) {
         if (bb == null) {
-            this.aabb = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+            this.aabb = new SimpleAxisAlignedBB(0, 0, 0, 0, 0, 0);
         }
 
         this.aabb = bb;
     }
 
     public AxisAlignedBB getBoundingBox() {
-        if (this.aabb == null) return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+        if (this.aabb == null) return new SimpleAxisAlignedBB(0, 0, 0, 0, 0, 0);
 
         return this.aabb.clone();
     }
