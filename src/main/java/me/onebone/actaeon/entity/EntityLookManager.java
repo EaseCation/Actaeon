@@ -32,7 +32,7 @@ public class EntityLookManager {
         if (entity instanceof EntityLiving) {
             pos.y += entity.getEyeHeight();
         } else {
-            pos.y = (entity.getBoundingBox().minY + entity.getBoundingBox().maxY) / 2;
+            pos.y = (entity.getBoundingBox().getMinY() + entity.getBoundingBox().getMaxY()) / 2;
         }
 
         setLookPosition(pos, stepYaw, stepPitch);

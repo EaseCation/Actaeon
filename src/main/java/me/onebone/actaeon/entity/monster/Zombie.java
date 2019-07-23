@@ -6,7 +6,9 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
 import me.onebone.actaeon.entity.Fallable;
+import me.onebone.actaeon.hook.LookIdleHook;
 import me.onebone.actaeon.hook.WanderHook;
+import me.onebone.actaeon.hook.WatchClosestHook;
 import me.onebone.actaeon.target.AreaHaterTargetFinder;
 
 public class Zombie extends Monster implements EntityAgeable, Fallable {
@@ -17,7 +19,10 @@ public class Zombie extends Monster implements EntityAgeable, Fallable {
         super(chunk, nbt);
 
         this.setTargetFinder(new AreaHaterTargetFinder(this, Player.class, 500, 16));
+
         this.addHook(4, new WanderHook(this));
+        this.addHook(5, new WatchClosestHook(this, Player.class, 6));
+        this.addHook(6, new LookIdleHook(this));
 
         setMaxHealth(20);
     }

@@ -17,9 +17,9 @@ public class AttackHook extends MovingEntityHook {
     private long lastAttack = 0;
     private double attackDistance;
     private long coolDown;
-    private int effectual;  //攻击成功率 0~10
-    private double viewAngle;  //机器人视野范围（攻击有效范围）
-    private boolean jump;  //是否自动跳劈
+    private int effectual;
+    private double viewAngle;
+    private boolean jump;
     private float damage;
 
     public AttackHook(MovingEntity entity) {

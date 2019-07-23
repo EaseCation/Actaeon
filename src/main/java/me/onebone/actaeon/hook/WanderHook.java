@@ -2,12 +2,12 @@ package me.onebone.actaeon.hook;
 
 import cn.nukkit.math.Vector2;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.utils.MainLogger;
 import me.onebone.actaeon.entity.MovingEntity;
 import me.onebone.actaeon.target.EntityTarget;
 import me.onebone.actaeon.util.Utils;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by CreeperFace on 19.7.2017.
@@ -49,7 +49,7 @@ public class WanderHook extends MovingEntityHook {
 
     @Override
     public boolean shouldExecute() {
-        if (entity.getLevel().rand.nextInt(chance) != 0)
+        if (ThreadLocalRandom.current().nextInt(chance) != 0)
             return false;
 
         target = findVector();
@@ -98,26 +98,26 @@ public class WanderHook extends MovingEntityHook {
 //            } else if(this.entity.isCollidedZ) {
 //                moveVector.z = -moveVector.z;
 //            }
-            boolean overAngle = false;
-            boolean negative = false;
+//            boolean overAngle = false;
+//            boolean negative = false;
 
             if (this.entity.isCollidedX && Math.abs(this.entity.x - this.entity.lastX) < 0.0125) {
-                if (moveVector.x > 0.5) {
-                    overAngle = true;
-                } else if (moveVector.x < -0.5) {
-                    overAngle = true;
-                    negative = true;
-                }
+//                if (moveVector.x > 0.5) {
+//                    overAngle = true;
+//                } else if (moveVector.x < -0.5) {
+//                    overAngle = true;
+//                    negative = true;
+//                }
 
                 moveVector.x = -moveVector.x;
 //                MainLogger.getLogger().info("collided X");
             } else if (this.entity.isCollidedZ && Math.abs(this.entity.z - this.entity.lastZ) < 0.0125) {
-                if (moveVector.z > 0.5) {
-                    overAngle = true;
-                } else if (moveVector.z < -0.5) {
-                    overAngle = true;
-                    negative = true;
-                }
+//                if (moveVector.z > 0.5) {
+//                    overAngle = true;
+//                } else if (moveVector.z < -0.5) {
+//                    overAngle = true;
+//                    negative = true;
+//                }
 
                 moveVector.z = -moveVector.z;
 //                MainLogger.getLogger().info("collided Z");
@@ -125,9 +125,9 @@ public class WanderHook extends MovingEntityHook {
 
             double newYawDiff = Math.toDegrees(Utils.getAngleBetween(direction, moveVector));
 
-            if (Double.isNaN(newYawDiff)) {
-                MainLogger.getLogger().info("dir: " + direction + "  vec: " + moveVector);
-            }
+//            if (Double.isNaN(newYawDiff)) {
+//                MainLogger.getLogger().info("dir: " + direction + "  vec: " + moveVector);
+//            }
 
 //            if(overAngle) {
 //                newYawDiff = 180 - newYawDiff;
@@ -171,13 +171,13 @@ public class WanderHook extends MovingEntityHook {
     @Override
     public void startExecuting() {
         this.entity.setDirectTarget(EntityTarget.builder().target(this.target).identifier("wander").build());
-        this.time = (this.entity.level.rand.nextInt(8) + 7) * 20;
+        this.time = (ThreadLocalRandom.current().nextInt(8) + 7) * 20;
 //        startTick = this.entity.getServer().getTick();
 //        distance = Double.MAX_VALUE;
     }
 
     private Vector3 findVector() {
-        Random random = this.entity.level.rand;
+        Random random = ThreadLocalRandom.current();
         Vector3 base = this.entity.getRealTarget() != null ? this.entity.getTarget() : this.getEntity().getPosition();
 
         double r = random.nextDouble() * 360;

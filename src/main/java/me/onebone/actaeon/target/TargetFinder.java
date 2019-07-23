@@ -3,7 +3,8 @@ package me.onebone.actaeon.target;
 import me.onebone.actaeon.entity.MovingEntity;
 
 public abstract class TargetFinder {
-    protected MovingEntity entity = null;
+
+    protected MovingEntity entity;
     protected long nextFind = 0;
     protected long interval;
 

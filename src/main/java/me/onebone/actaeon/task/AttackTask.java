@@ -47,6 +47,8 @@ public class AttackTask extends MovingEntityTask {
                 this.target.attack(new EntityDamageByEntityEvent(this.getEntity(), this.target, EntityDamageEvent.DamageCause.ENTITY_ATTACK, this.damage));
                 this.target.noDamageTicks = 10;
             }
+        } else {
+            entity.getLookManager().setLookPosition(this.target, 10, 10);
         }
 
         EntityEventPacket pk = new EntityEventPacket();
