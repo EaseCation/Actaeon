@@ -3,6 +3,7 @@ package me.onebone.actaeon.entity;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityLiving;
 import cn.nukkit.level.Level;
+import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
 import me.onebone.actaeon.hook.MovingEntityHook;
@@ -75,4 +76,8 @@ public interface IMovingEntity {
     default int getDifficulty() {
         return getLevel().getServer().getDifficulty();
     }
+
+    Location add(Vector3 vec);
+
+    Location add(double x, double y, double z);
 }
