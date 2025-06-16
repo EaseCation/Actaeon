@@ -6,7 +6,7 @@ plugins {
 extra.set("copyTo", "{server}/plugins")
 
 dependencies {
-    compileOnly(project(":Nukkit"))
+    compileOnly(project(":nukkit"))
     compileOnly(project(":ECCommons"))
 }
 
