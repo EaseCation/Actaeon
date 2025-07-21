@@ -114,6 +114,11 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 		return 0.092f;
 	}
 
+	@Override
+	protected double getStepHeight() {
+		return 0.6; // Enable step climbing like vanilla players
+	}
+
 	public Entity getHate() {
 		return hate;
 	}
