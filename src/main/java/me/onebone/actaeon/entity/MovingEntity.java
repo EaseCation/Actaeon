@@ -262,7 +262,7 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 						// 如果 collidePlayerToMove > 0，则应用运动向量来推动玩家
 						if (collidePlayerToMove > 0f) {
 							Vector3 playerMotion = entity.subtract(this).normalize().multiply(collidePlayerToMove);
-							playerMotion.y = -0.49f; // 向下施加一点重力
+							playerMotion.y = -0.1f; // 向下施加一点重力
 							entity.setMotion(playerMotion);
 						}
 					}
