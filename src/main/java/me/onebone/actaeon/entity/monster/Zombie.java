@@ -98,7 +98,7 @@ public class Zombie extends Monster implements EntityAgeable, Fallable {
 		if (!isOnFire()) {
 			return;
 		}
-		int difficulty = server.getDifficulty();
+		int difficulty = level.getDifficulty();
 		if (difficulty < Difficulty.NORMAL.ordinal()) {
 			return;
 		}

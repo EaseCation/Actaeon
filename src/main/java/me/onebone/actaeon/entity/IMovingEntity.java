@@ -74,7 +74,7 @@ public interface IMovingEntity {
     void updateBotTask(MovingEntityTask task);
 
     default int getDifficulty() {
-        return getLevel().getServer().getDifficulty();
+        return getLevel().getDifficulty();
     }
 
     Location add(Vector3 vec);

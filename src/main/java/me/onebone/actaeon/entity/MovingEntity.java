@@ -566,6 +566,7 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 			case WITHER:
 			case HUNGER:
 			case DROWNING:
+            case DEHYDRATION:
 			case SUFFOCATION:
 			case SUICIDE:
 			case FIRE_TICK:
