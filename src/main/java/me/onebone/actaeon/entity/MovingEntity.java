@@ -594,7 +594,7 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 
 		if (itemDamaged < 0) {
 			getLevel().addLevelSoundEvent(this, LevelSoundEventPacket.SOUND_BREAK);
-			return Item.get(BlockID.AIR, 0, 0);
+			return Item.get(Item.AIR);
 		}
 
 		return armor;
