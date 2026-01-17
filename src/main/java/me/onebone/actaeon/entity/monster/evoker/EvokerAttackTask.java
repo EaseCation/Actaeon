@@ -136,9 +136,11 @@ public class EvokerAttackTask extends MovingEntityTask {
             }
             y = blockY;
             if (!block.isAir()) {
-                AxisAlignedBB aabb = block.getBoundingBox();
-                if (aabb != null) {
-                    y = aabb.getMaxY();
+                AxisAlignedBB[] aabbs = block.getCollisionShape();
+                if (aabbs != null) {
+                    for (AxisAlignedBB aabb : aabbs) {
+                        y = Math.max(y, aabb.getMaxY());
+                    }
                 }
             }
             success = true;

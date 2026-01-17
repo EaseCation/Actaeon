@@ -1,6 +1,7 @@
 package me.onebone.actaeon.utils;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.ClipFlag;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.MovingObjectPosition;
 import cn.nukkit.math.Mth;
@@ -16,30 +17,19 @@ public class BlockClip {
     }
 
     public static Optional<MovingObjectPosition> clip(Level level, Vector3 startVec, Vector3 endVec, boolean liquid, boolean ignoreBarrier, int blockX, int blockY, int blockZ) {
-        MovingObjectPosition hitResult;
+        MovingObjectPosition hitResult = null;
+        int flags = ClipFlag.CLAMP;
+        if (ignoreBarrier) {
+            flags |= ClipFlag.IGNORE_BARRIER;
+        }
         if (liquid) {
+            flags |= ClipFlag.LIQUID;
             Block extraBlock = level.getExtraBlock(blockX, blockY, blockZ, false);
-            if (extraBlock.isLiquid()) {
-                hitResult = extraBlock.clip(startVec, endVec, extraBlock::getCollisionBoundingBox);
-            } else if (!extraBlock.isAir()) {
-                hitResult = extraBlock.calculateIntercept(startVec, endVec);
-            } else {
-                Block block = level.getBlock(blockX, blockY, blockZ, false);
-                if (block.isLiquid()) {
-                    hitResult = block.clip(startVec, endVec, block::getCollisionBoundingBox);
-                } else if (ignoreBarrier && block.is(Block.BARRIER)) {
-                    hitResult = null;
-                } else {
-                    hitResult = block.calculateIntercept(startVec, endVec);
-                }
-            }
-        } else {
+            hitResult = extraBlock.clip(startVec, endVec, flags);
+        }
+        if (hitResult == null) {
             Block block = level.getBlock(blockX, blockY, blockZ, false);
-            if (ignoreBarrier && block.is(Block.BARRIER)) {
-                hitResult = null;
-            } else {
-                hitResult = block.calculateIntercept(startVec, endVec);
-            }
+            hitResult = block.clip(startVec, endVec, flags);
         }
         return Optional.ofNullable(hitResult);
     }
