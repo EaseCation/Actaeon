@@ -8,6 +8,7 @@ import cn.nukkit.entity.EntityCreature;
 import cn.nukkit.entity.EntityHuman;
 import cn.nukkit.entity.EntityLiving;
 import cn.nukkit.entity.attribute.Attribute;
+import cn.nukkit.entity.knockback.KnockbackProfile;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -625,7 +626,7 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 	}
 
 	@Override
-	public void knockBack(Entity attacker, double damage, double x, double z, cn.nukkit.knockback.KnockbackProfile profile) {
+	public void knockBack(Entity attacker, double damage, double x, double z, KnockbackProfile profile) {
 		this.isKnockback = true;
 		super.knockBack(attacker, damage, x, z, profile);
 	}
