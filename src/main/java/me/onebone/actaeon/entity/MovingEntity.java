@@ -289,6 +289,12 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 			this.move(this.motionX, this.motionY, this.motionZ);
 
 			this.checkGround();
+			// 更新最高位置记录，用于摔落伤害计算（与 Player 逻辑一致）
+			if (this.y > this.highestPosition) {
+				this.highestPosition = this.y;
+			}
+			// checkGroundState 中未设置 onGround，需在 checkGround() 后手动触发摔落状态更新
+			this.updateFallState(this.onGround);
 			if (!this.onGround) {
 				float gravity = this.getGravity();
 
