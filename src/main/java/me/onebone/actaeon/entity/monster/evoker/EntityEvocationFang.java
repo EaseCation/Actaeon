@@ -134,7 +134,7 @@ public class EntityEvocationFang extends Entity {
 
                     EntityDamageByChildEntityEvent event = new EntityDamageByChildEntityEvent(this.owner, this, entity, DamageCause.MAGIC, this.damage);
                     if (!Float.isNaN(knockBack)) {
-                        event.setKnockBack(knockBack);
+                        event.setKnockbackBase(knockBack);
                     }
                     entity.attack(event);
                 }
