@@ -7,6 +7,7 @@ import cn.nukkit.inventory.InventoryHolder;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.network.protocol.MobEquipmentPacket;
+import cn.nukkit.network.protocol.types.ContainerIds;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,6 +59,7 @@ public class EntityEquipmentInventory extends BaseInventory {
         MobEquipmentPacket mobEquipmentPacket = new MobEquipmentPacket();
         mobEquipmentPacket.eid = this.entity.getId();
         mobEquipmentPacket.inventorySlot = mobEquipmentPacket.hotbarSlot = index;
+        mobEquipmentPacket.windowId = index == OFFHAND ? ContainerIds.OFFHAND : ContainerIds.INVENTORY;
         mobEquipmentPacket.item = this.getItem( index );
         player.dataPacket( mobEquipmentPacket );
     }
