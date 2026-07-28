@@ -632,6 +632,11 @@ abstract public class MovingEntity extends EntityCreature implements IMovingEnti
 	}
 
 	@Override
+	protected void onKnockbackApplied() {
+		this.isKnockback = true;
+	}
+
+	@Override
 	protected float getKnockbackResistance() {
 		float total = 0;
 		for (Item armor : armorInventory.getContents().values()) {
